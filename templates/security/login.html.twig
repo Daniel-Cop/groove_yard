@@ -4,7 +4,7 @@
 
 {% block body %}
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <section class="mx-auto text-2xl relative mt-4 grid h-[80px] place-items-center overflow-hidden rounded-xl bg-[#292a2d] border-[#c24238] border-[6px] text-white w-30 w-[250px]">{{ error.messageKey|trans(error.messageData, 'security') }}</section>
         {% endif %}
     {#
         {% if app.user %}

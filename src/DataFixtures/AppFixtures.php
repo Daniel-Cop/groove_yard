@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Album;
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Condition;
@@ -83,6 +84,7 @@ class AppFixtures extends Fixture
                 ->setYear(strval($faker->numberBetween(1948, 2024)))
                 ->setDescription($faker->realTextBetween($minNbChars = 160, $maxNbChars = 200, $indexSize = 2))
                 ->setState($faker->randomElement($conditionList))
+                ->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-2 years')))
                 ->setUser($faker->randomElement($userList));
 
             $manager->persist($album);
