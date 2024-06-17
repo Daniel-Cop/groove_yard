@@ -1,0 +1,16 @@
+
+<nav class="flex flex-col md:flex-row bg-[#292a2d] text-white shadow-md leading-none">
+    <div class="flex items-center mx-5 py-5 md:py-0">
+        <svg class="fill-current inline-block" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" d="M21.95 13c-.501 5.054-4.765 9-9.95 9c-5.523 0-10-4.477-10-10c0-5.185 3.947-9.448 9-9.95"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12V2.456a10.024 10.024 0 0 1 6.542 6.542"/></g></svg>
+        <h1 class="text-2xl ml-2 inline-block">Groove Yard</h1>
+    </div>
+    <div class="md:flex md:flex-grow bg-[#292a2d] md:bg-[#292a2d]">
+        <ul class="text-lg md:flex md:ml-auto ">
+        <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if currentPath == '/' %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="{{ path('app_index') }}">Home</a></li>
+        <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if '/about' in currentPath %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="{{ path('app_about') }}">About</a></li>
+        <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if '/project' in currentPath %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="">Projects</a></li>
+        <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if '/blog' in currentPath %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="">Blog</a></li>
+        <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if '/login' in currentPath %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="{{ path('app_login') }}">Login</a></li>
+        </ul>
+    </div>
+</nav>

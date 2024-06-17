@@ -1,3 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+COLOR
+#292a2d - dark grey
+#d8bdaa - sand
+#c24238 - brick
+#bbbbbc - grey
+#393333 - brownish dark grey
+*/
+
 body {
-    background-color: skyblue;
+  background-color: #d8bdaa;
 }
