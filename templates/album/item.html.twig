@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Groove Yard{% endblock %}
+
+{% block body %}
+    <div class='flex'>
+        <img class="size-[128px]" src="{{ asset('images/' ~ album.image) }}" alt="Record picture">
+        <div>
+        <h2>{{ album.title }}</h2>
+        <h3> {{ album.artist }}</h3>
+        <p>{{ album.year }}</p>
+        </div>
+    </div>
+{% endblock %}

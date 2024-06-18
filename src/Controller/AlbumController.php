@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Album;
 use App\Repository\AlbumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,13 @@ class AlbumController extends AbstractController
     public function list(AlbumRepository $repo): Response
     {
         return $this->render('album/list.html.twig', [
-            'albums' => $repo->findBy([], ['createdAt' => 'DESC']),
+            'albums' => $repo->findBy([], ['year' => 'DESC']),
         ]);
+    }
+
+    #[Route('/album/{id}', name: 'album_item')]
+    public function item(Album $album): Response
+    {
+        return $this->render('album/item.html.twig', ['album' => $album]);
     }
 }

@@ -44,14 +44,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $username = null;
 
     /**
-     * @var Collection<int, Album>
+     * @var Collection<int, Inventory>
      */
-    #[ORM\OneToMany(targetEntity: Album::class, mappedBy: 'user')]
-    private Collection $albums;
+    #[ORM\OneToMany(targetEntity: Inventory::class, mappedBy: 'user')]
+    private Collection $inventories;
 
     public function __construct()
     {
-        $this->albums = new ArrayCollection();
+        $this->inventories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -142,32 +142,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Album>
+     * @return Collection<int, Inventory>
      */
-    public function getAlbums(): Collection
+    public function getInventories(): Collection
     {
-        return $this->albums;
+        return $this->inventories;
     }
 
-    public function addAlbum(Album $album): static
+    public function addInventory(Inventory $inventory): static
     {
-        if (!$this->albums->contains($album)) {
-            $this->albums->add($album);
-            $album->setUser($this);
+        if (!$this->inventories->contains($inventory)) {
+            $this->inventories->add($inventory);
+            $inventory->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeAlbum(Album $album): static
+    public function removeInventory(Inventory $inventory): static
     {
-        if ($this->albums->removeElement($album)) {
+        if ($this->inventories->removeElement($inventory)) {
             // set the owning side to null (unless already changed)
-            if ($album->getUser() === $this) {
-                $album->setUser(null);
+            if ($inventory->getUser() === $this) {
+                $inventory->setUser(null);
             }
         }
 
         return $this;
     }
+
 }

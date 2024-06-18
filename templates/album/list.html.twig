@@ -4,10 +4,15 @@
 
 {% block body %}
   {% for album in albums %}
+  <div>
+  <a href="{{ path('album_item', {id: album.id}) }}">
+      <img class="inline-block flex-shrink-0 size-[128px]" src="{{ asset('images/' ~ album.image) }}" alt="Record picture">
     <p>
+
         <span class="hover:underline" href="">{{ album.title }}</span> - 
         <span>{{ album.artist }}</span>
-      ({{ album.createdAt|date('d/m/Y') }})
     </p>
+  </a>
+  </div>
   {% endfor %}
 {% endblock %}

@@ -26,17 +26,6 @@ class Condition
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    /**
-     * @var Collection<int, Album>
-     */
-    #[ORM\OneToMany(targetEntity: Album::class, mappedBy: 'state')]
-    private Collection $albums;
-
-    public function __construct()
-    {
-        $this->albums = new ArrayCollection();
-    }
-
     public function __toString() {
         return $this->name;
     }
@@ -70,33 +59,4 @@ class Condition
         return $this;
     }
 
-    /**
-     * @return Collection<int, Album>
-     */
-    public function getAlbums(): Collection
-    {
-        return $this->albums;
-    }
-
-    public function addAlbum(Album $album): static
-    {
-        if (!$this->albums->contains($album)) {
-            $this->albums->add($album);
-            $album->setState($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAlbum(Album $album): static
-    {
-        if ($this->albums->removeElement($album)) {
-            // set the owning side to null (unless already changed)
-            if ($album->getState() === $this) {
-                $album->setState(null);
-            }
-        }
-
-        return $this;
-    }
 }

@@ -1,0 +1,259 @@
+[
+  {
+    "title": "What's Going On",
+    "artist": "Marvin Gaye",
+    "year": 1971
+  },
+  {
+    "title": "Kind of Blue",
+    "artist": "Miles Davis",
+    "year": 1959
+  },
+  {
+    "title": "Abbey Road",
+    "artist": "The Beatles",
+    "year": 1969
+  },
+  {
+    "title": "Rumours",
+    "artist": "Fleetwood Mac",
+    "year": 1977
+  },
+  {
+    "title": "Are You Experienced",
+    "artist": "The Jimi Hendrix Experience",
+    "year": 1967
+  },
+  {
+    "title": "Purple Rain",
+    "artist": "Prince",
+    "year": 1984
+  },
+  {
+    "title": "Graceland",
+    "artist": "Paul Simon",
+    "year": 1986
+  },
+  {
+    "title": "Never Mind the Bollocks, Here's the Sex Pistols",
+    "artist": "Sex Pistols",
+    "year": 1977
+  },
+  {
+    "title": "Back in Black",
+    "artist": "AC/DC",
+    "year": 1980
+  },
+  {
+    "title": "The Dark Side of the Moon",
+    "artist": "Pink Floyd",
+    "year": 1973
+  },
+  {
+    "title": "Thriller",
+    "artist": "Michael Jackson",
+    "year": 1982
+  },
+  {
+    "title": "Led Zeppelin IV",
+    "artist": "Led Zeppelin",
+    "year": 1971
+  },
+  {
+    "title": "Radiohead",
+    "artist": "Radiohead",
+    "year": 1997
+  },
+  {
+    "title": "The Rise and Fall of Ziggy Stardust and the Spiders from Mars",
+    "artist": "David Bowie",
+    "year": 1972
+  },
+  {
+    "title": "Achtung Baby",
+    "artist": "U2",
+    "year": 1991
+  },
+  {
+    "title": "Get Up (I Feel Like Being a) Sex Machine",
+    "artist": "James Brown",
+    "year": 1970
+  },
+  {
+    "title": "Dookie",
+    "artist": "Green Day",
+    "year": 1994
+  },
+  {
+    "title": "Marquee Moon",
+    "artist": "Television",
+    "year": 1977
+  },
+  {
+    "title": "Low",
+    "artist": "David Bowie",
+    "year": 1977
+  },
+  {
+    "title": "Sign O' the Times",
+    "artist": "Prince",
+    "year": 1987
+  },
+  {
+    "title": "Pet Sounds",
+    "artist": "The Beach Boys",
+    "year": 1966
+  },
+  {
+    "title": "Disintegration",
+    "artist": "The Cure",
+    "year": 1989
+  },
+  {
+    "title": "Demon Days",
+    "artist": "Gorillaz",
+    "year": 2005
+  },
+  {
+    "title": "The Velvet Underground & Nico",
+    "artist": "The Velvet Underground",
+    "year": 1967
+  },
+  {
+    "title": "Like a Rolling Stone",
+    "artist": "Bob Dylan",
+    "year": 1965
+  },
+  {
+    "title": "A Love Supreme",
+    "artist": "John Coltrane",
+    "year": 1964
+  },
+  {
+    "title": "The Bends",
+    "artist": "Radiohead",
+    "year": 1995
+  },
+  {
+    "title": "Born to Run",
+    "artist": "Bruce Springsteen",
+    "year": 1975
+  },
+  {
+    "title": "Boston",
+    "artist": "Boston",
+    "year": 1976
+  },
+  {
+    "title": "Hotel California",
+    "artist": "Eagles",
+    "year": 1976
+  },
+  { "title": "Paranoid", "artist": "Black Sabbath", "year": 1970 },
+  { "title": "Machine Head", "artist": "Deep Purple", "year": 1972 },
+  {
+    "title": "Appetite for Destruction",
+    "artist": "Guns N' Roses",
+    "year": 1987
+  },
+  {
+    "title": "Let There Be Rock",
+    "artist": "AC/DC",
+    "year": 1977
+  },
+  {
+    "title": "American Idiot",
+    "artist": "Green Day",
+    "year": 2004
+  },
+  {
+    "title": "Hysteria",
+    "artist": "Def Leppard",
+    "year": 1987
+  },
+  {
+    "title": "The Wall",
+    "artist": "Pink Floyd",
+    "year": 1979
+  },
+  {
+    "title": "Nevermind",
+    "artist": "Nirvana",
+    "year": 1991
+  },
+  {
+    "title": "Born to Be Wild",
+    "artist": "Steppenwolf",
+    "year": 1968
+  },
+  {
+    "title": "Legend 11 Outlandos Road",
+    "artist": "David Bowie",
+    "year": 1979
+  },
+  {
+    "title": "Highway to Hell",
+    "artist": "AC/DC",
+    "year": 1979
+  },
+  {
+    "title": "For Those About to Rock (We Salute You)",
+    "artist": "AC/DC",
+    "year": 1981
+  },
+  {
+    "title": "Master of Puppets",
+    "artist": "Metallica",
+    "year": 1986
+  },
+  {
+    "title": "The Black Album",
+    "artist": "Metallica",
+    "year": 1991
+  },
+  {
+    "title": "Ten",
+    "artist": "Pearl Jam",
+    "year": 1991
+  },
+  {
+    "title": "Tragic Kingdom",
+    "artist": "No Doubt",
+    "year": 1995
+  },
+  {
+    "title": "(What's the Story) Morning Glory?",
+    "artist": "Oasis",
+    "year": 1995
+  },
+  {
+    "title": "Wish You Were Here",
+    "artist": "Pink Floyd",
+    "year": 1975
+  },
+  {
+    "title": "In Utero",
+    "artist": "Nirvana",
+    "year": 1993
+  },
+  {
+    "title": "A Night at the Opera",
+    "artist": "Queen",
+    "year": 1975
+  },
+  {
+    "title": "The Offspring",
+    "artist": "The Offspring",
+    "year": 1994
+  },
+  {
+    "title": "Californication",
+    "artist": "Red Hot Chili Peppers",
+    "year": 1999
+  },
+  {
+    "title": "FUZZY LOGIC",
+    "artist": "The Smashing Pumpkins",
+    "year": 1993
+  }
+]

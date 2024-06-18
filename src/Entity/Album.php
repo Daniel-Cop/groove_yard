@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AlbumRepository;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
@@ -14,31 +15,28 @@ class Album
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 120)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 120)]
     private ?string $artist = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column]
+    private ?int $year = null;
+
+    #[ORM\Column(length: 120)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 4, nullable: true)]
-    private ?string $year = null;
+    /**
+     * @var Collection<int, Inventory>
+     */
+    #[ORM\OneToMany(targetEntity: Inventory::class, mappedBy: 'album')]
+    private Collection $inventories;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
-
-    #[ORM\ManyToOne(inversedBy: 'albums')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Condition $state = null;
-
-    #[ORM\ManyToOne(inversedBy: 'albums')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    public function __construct()
+    {
+        $this->inventories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,74 +67,56 @@ class Album
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): static
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getYear(): ?string
+    public function getYear(): ?int
     {
         return $this->year;
     }
 
-    public function setYear(?string $year): static
+    public function setYear(int $year): static
     {
         $this->year = $year;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getImage(): ?string
     {
-        return $this->description;
+        return $this->image;
     }
 
-    public function setDescription(?string $description): static
+    public function setImage(string $image): static
     {
-        $this->description = $description;
+        $this->image = $image;
 
         return $this;
     }
 
-    public function getState(): ?Condition
+    /**
+     * @return Collection<int, Inventory>
+     */
+    public function getInventories(): Collection
     {
-        return $this->state;
+        return $this->inventories;
     }
 
-    public function setState(?Condition $state): static
+    public function addInventory(Inventory $inventory): static
     {
-        $this->state = $state;
+        if (!$this->inventories->contains($inventory)) {
+            $this->inventories->add($inventory);
+            $inventory->setAlbum($this);
+        }
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function removeInventory(Inventory $inventory): static
     {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $createdAt): static
-    {
-        $this->createdAt = $createdAt;
+        if ($this->inventories->removeElement($inventory)) {
+            // set the owning side to null (unless already changed)
+            if ($inventory->getAlbum() === $this) {
+                $inventory->setAlbum(null);
+            }
+        }
 
         return $this;
     }

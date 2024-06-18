@@ -7,7 +7,7 @@
         <ul class="text-lg md:flex md:ml-auto ">
             <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if currentPath == '/' %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="{{ path('app_index') }}">Home</a></li>
             <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if '/about' in currentPath %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="{{ path('app_about') }}">About</a></li>
-            <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if '/project' in currentPath %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="">Projects</a></li>
+            <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if '/album' in currentPath %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="{{ path('album_list') }}">Records</a></li>
             <li><a class="w-full md:w-auto p-5 inline-block border-b-4 {% if '/blog' in currentPath %}  border-white bg-[#c24238] {% else %} border-transparent hover:border-white hover:bg-[#393333] {% endif %}" href="">Blog</a></li>
         </ul>
     </div>

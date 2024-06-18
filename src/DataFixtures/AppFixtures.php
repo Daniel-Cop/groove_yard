@@ -2,7 +2,10 @@
 
 namespace App\DataFixtures;
 
+
 use App\Entity\Album;
+use App\Entity\Intention;
+use App\Entity\Inventory;
 use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -12,7 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    private const CONDITIONS_LIST =
+    private const CONDITIONS =
         [
             [
                 'name' => "Mint",
@@ -36,19 +39,44 @@ class AppFixtures extends Fixture
             ],
         ];
 
+    private const INTENTIONS = ['Owned', 'To Sell', 'Want'];
+
+    private function JSONTranslate($file)
+    {
+        $filename = __DIR__ . '/' . $file;
+        
+        if (!file_exists($filename)) {
+            return null;
+        }
+
+        $fileContent = file_get_contents($filename);
+        if ($fileContent === false) {
+            return null;
+        }
+
+        $data = json_decode($fileContent, true);
+        if ($data === null) {
+            return null;
+        }
+
+        return $data;
+
+    }
 
     public function load(ObjectManager $manager): void
     {
 
         $faker = \Faker\Factory::create('en_US');
         $conditionList = [];
+        $intentionList = [];
         $userList = [];
+        $albumList = [];
 
-        foreach (self::CONDITIONS_LIST as $cond) {
+        foreach (self::CONDITIONS as $c) {
 
             $condition = new Condition();
-            $condition->setName($cond["name"])
-                ->setDescription($cond["desc"]);
+            $condition->setName($c["name"])
+                ->setDescription($c["desc"]);
 
             $conditionList[] = $condition;
 
@@ -56,6 +84,17 @@ class AppFixtures extends Fixture
 
         }
 
+        foreach (self::INTENTIONS as $i) {
+
+            $intention = new Intention();
+            $intention->setName($i);
+
+            $intentionList[] = $intention;
+
+            $manager->persist($intention);
+
+        }
+        
         for ($i = 0; $i < 20; $i++) {
             $user = new User();
             $user->setEmail($faker->safeEmail())
@@ -76,18 +115,29 @@ class AppFixtures extends Fixture
 
         $manager->persist($admin);
 
-        for ($i = 0; $i < 100; $i++) {
-            $album = new Album;
-            $album->setTitle($faker->sentence($faker->numberBetween(1, 5)))
-                ->setArtist($faker->firstName($gender = 'male' | 'female'))
-                ->setImage($faker->url())
-                ->setYear(strval($faker->numberBetween(1948, 2024)))
-                ->setDescription($faker->realTextBetween($minNbChars = 160, $maxNbChars = 200, $indexSize = 2))
-                ->setState($faker->randomElement($conditionList))
-                ->setCreatedAt(DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-2 years')))
-                ->setUser($faker->randomElement($userList));
+        $data = $this->JSONTranslate('records.json');
 
-            $manager->persist($album);
+        foreach ($data as $d) {
+            $record = new Album();
+            $record->setTitle($d['title'])
+            ->setArtist($d['artist'])
+            ->setYear($d['year'])
+            ->setImage('vinyl-'.$faker->randomElement(['1', '2', '3', '4', '5']).'.png');
+
+            $albumList[] = $record;
+            $manager->persist($record);
+        }
+
+        for ($i = 0; $i < 55; $i++) {
+            $inventory = new Inventory();
+            $inventory->setUser($faker->randomElement($userList))
+            ->setAlbum($faker->randomElement($albumList))
+            ->setIntention($faker->randomElement($intentionList))
+            ->setStatus($faker->randomElement($conditionList))
+            ->setCreatedAt($faker->dateTimeBetween('-1 year'));
+
+            $manager->persist($inventory);
+
         }
 
         $manager->flush();
