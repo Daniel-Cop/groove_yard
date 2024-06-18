@@ -1,13 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AlbumController!{% endblock %}
+{% block title %}Groove Yard{% endblock %}
 
 {% block body %}
-  {% for album in albums %}
+  <h2 class="font-bold text-3xl">My collection</h2>
+
+  {% for item in owned %}
     <p>
-        <span class="hover:underline" href="">{{ album.title }}</span> - 
-        <span>{{ album.artist }}</span>
+        <span class="hover:underline" href="">{{ item.getAlbum().title }}</span> - {{ item.getAlbum().artist }} -
+        <span>{{ item.status }}</span> - 
+        <span>{{ item.intention }}</span>
+        <a href="{{ path('user_collection_edit', {id: item.getId()}) }}" class="font-bold">Edit</a>
+        <form method="post" action="{{ path('user_collection_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete {{ item.getAlbum().getTitle() }} from your collection?');">
+          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+          <button class="btn">Delete</button>
+        </form>
     </p>
-      <img src="{{ asset('albums/' ~ album.image ) }}" alt="">
+  
+      {# <img src="{{ asset('albums/' ~ album.image ) }}" alt=""> #}
+
+  {% endfor %}
+  <h2 class="font-bold text-3xl">I'm looking for</h2>
+  {% for item in want %}
+    <p>
+        <span class="hover:underline" href="">{{ item.getAlbum().title }}</span> - {{ item.getAlbum().artist }} -
+        <span>{{ item.status }}</span> - 
+        <span>{{ item.intention }}</span>
+        <a href="{{ path('user_collection_edit', {id: item.getId()}) }}" class="font-bold">Edit</a>
+    </p>
+  
+      {# <img src="{{ asset('albums/' ~ album.image ) }}" alt=""> #}
+
+  {% endfor %}
+  <h2 class="font-bold text-3xl">I'm selling</h2>
+  {% for item in to_sell %}
+    <p>
+        <span class="hover:underline" href="">{{ item.getAlbum().title }}</span> - {{ item.getAlbum().artist }} -
+        <span>{{ item.status }}</span> - 
+        <span>{{ item.intention }}</span>
+        <a href="{{ path('user_collection_edit', {id: item.getId()}) }}" class="font-bold">Edit</a>
+    </p>
+  
+      {# <img src="{{ asset('albums/' ~ album.image ) }}" alt=""> #}
   {% endfor %}
 {% endblock %}

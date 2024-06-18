@@ -100,7 +100,8 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->safeEmail())
                 ->setUsername($faker->userName())
                 ->setRoles(['ROLE_USER'])
-                ->setPassword('test');
+                ->setPassword('test')
+                ->setImage('profile-'.$faker->randomElement(['1', '2', '3', '4']).'png');
 
             $userList[] = $user;
 

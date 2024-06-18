@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Inventory::class, mappedBy: 'user')]
     private Collection $inventories;
 
+    #[ORM\Column(length: 125, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->inventories = new ArrayCollection();
@@ -167,6 +170,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $inventory->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

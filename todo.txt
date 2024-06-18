@@ -1,0 +1,10 @@
+- pagina lista album: impaginare 10 alla volta e campo ricerca
+- pagina modifica profilo
+- uno user può avere in inventario due volte lo stesso album, lasciare?
+- modifica profilo
+
+** FRONT **
+- carta album
+- pagina profilo
+- pagina collezione
+- pagina singolo album

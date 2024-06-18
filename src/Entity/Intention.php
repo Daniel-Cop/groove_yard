@@ -16,6 +16,10 @@ class Intention
     #[ORM\Column(length: 25)]
     private ?string $name = null;
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
     public function getId(): ?int
     {
         return $this->id;

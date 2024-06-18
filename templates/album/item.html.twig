@@ -11,4 +11,7 @@
         <p>{{ album.year }}</p>
         </div>
     </div>
+
+    <a href="{{ path('user_collection_add', {id: album.id}) }}">Add to my collection</a>
+
 {% endblock %}
