@@ -4,11 +4,13 @@
 - modifica profilo
 - eventlistener per automatizzare lat e long
 
-** FRONT **
-- carta album
-- pagina profilo
-- pagina collezione
-- pagina singolo album
+!!! form in form (esempio in silver spoon) !!!
 
-.env.local
-COORDINATE_GETTER_BASE_URI='https://nominatim.openstreetmap.org'
+Chiedere se è possibile in un event subscriber segnalare un istanza di evento da non seguire
+
+** FRONT **
+    - carta album
+    - pagina profilo
+    - pagina collezione
+    - pagina singolo album
+

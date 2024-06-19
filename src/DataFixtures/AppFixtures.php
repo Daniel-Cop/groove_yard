@@ -3,10 +3,12 @@
 namespace App\DataFixtures;
 
 
+use App\Entity\Address;
 use App\Entity\Album;
 use App\Entity\Intention;
 use App\Entity\Inventory;
 use App\Entity\User;
+use App\Service\CoordinateApi;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -41,6 +43,7 @@ class AppFixtures extends Fixture
 
     private const INTENTIONS = ['Owned', 'To Sell', 'Want'];
 
+
     private function JSONTranslate($file)
     {
         $filename = __DIR__ . '/' . $file;
@@ -71,6 +74,7 @@ class AppFixtures extends Fixture
         $intentionList = [];
         $userList = [];
         $albumList = [];
+        $addressList = [];
 
         foreach (self::CONDITIONS as $c) {
 
@@ -94,6 +98,25 @@ class AppFixtures extends Fixture
             $manager->persist($intention);
 
         }
+        for ($i = 0; $i < 21; $i++) {
+            $address = new Address();
+            $address
+            ->setLatitude($faker->latitude($min = 43, $max = 49))
+            ->setLongitude($faker->longitude($min = 0.5, $max = 5.8))
+            ->setStreet($faker->streetName())
+            ->setNumber($faker->numerify('##'))
+            ->setPostalCode($faker->postcode())
+            ->setCity($faker->city());
+            // I tried to create more real fixture by creating a random latitude and longitude (but always situated in France)
+            // and then to use the reverse api to find the address from the coordinates. Unluckly the research was not always 
+            // precise enough to find an address 100% of the times, so i went via faker to create a fake address attached to real
+            // french coordinates (what the app really need is coordinate anyway)
+
+            $addressList[] = $address;
+
+            $manager->persist($address);
+
+        }
         
         for ($i = 0; $i < 20; $i++) {
             $user = new User();
@@ -101,7 +124,8 @@ class AppFixtures extends Fixture
                 ->setUsername($faker->userName())
                 ->setRoles(['ROLE_USER'])
                 ->setPassword('test')
-                ->setImage('profile-'.$faker->randomElement(['1', '2', '3', '4']).'png');
+                ->setImage('profile-'.$faker->randomElement(['1', '2', '3', '4']).'png')
+                ->setAddress($addressList[$i]);
 
             $userList[] = $user;
 
@@ -112,7 +136,9 @@ class AppFixtures extends Fixture
         $admin->setEmail('admin@groove.com')
             ->setUsername('Admin')
             ->setRoles(['ROLE_ADMIN'])
-            ->setPassword('admin');
+            ->setPassword('admin')
+            ->setImage('profile-'.$faker->randomElement(['1', '2', '3', '4']).'png')
+            ->setAddress($addressList[20]);
 
         $manager->persist($admin);
 

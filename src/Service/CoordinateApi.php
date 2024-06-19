@@ -11,7 +11,7 @@ class CoordinateApi
         private HttpClientInterface $coordinateGetter
     ) {
     }
-
+    // Generate latitude and longitude from a specific address via the Nominatim API
     public function getCoordinate(Address $address): array
     {
         $street = $address->getNumber() . '+' . $address->getStreet();
@@ -21,7 +21,7 @@ class CoordinateApi
         $response = $this->coordinateGetter->request('GET', '/search', [
             'query' => [
                 'street' => $street,
-                'postalcode' => $postalCode,
+                'postcode' => $postalCode,
                 'city' => $city,
                 'format' => 'json'
             ]
@@ -37,5 +37,31 @@ class CoordinateApi
         return $coordinates;
 
     }
+
+    // I leave that method for later consultation in case of need. It was created to make better fixture,
+    // but later abandoned (see comment in AppFixture for further info)
+
+    // public function reverse(Address $address): array
+    // {
+    //     $lat = $address->getLatitude();
+    //     $lon = $address->getLongitude();
+
+    //     $response = $this->coordinateGetter->request('GET', '/reverse', [
+    //         'query'=> [
+    //             'lat' => $lat,
+    //             'lon' => $lon,
+    //             'format' => 'json'
+    //         ]
+    //         ]);
+    //     $data = $response->toArray();
+    //     if (count($data) != 0) {
+    //         $reversedAddress = $data['address'];
+    //     }
+
+    //     $newAddress = [
+    //         'city' =>$reversedAddress['village']
+    //     ];
+    //     return $newAddress;
+    // }
 
 }
