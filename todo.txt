@@ -2,9 +2,13 @@
 - pagina modifica profilo
 - uno user può avere in inventario due volte lo stesso album, lasciare?
 - modifica profilo
+- eventlistener per automatizzare lat e long
 
 ** FRONT **
 - carta album
 - pagina profilo
 - pagina collezione
 - pagina singolo album
+
+.env.local
+COORDINATE_GETTER_BASE_URI='https://nominatim.openstreetmap.org'

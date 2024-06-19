@@ -10,6 +10,7 @@ use App\Form\InventoryType;
 use App\Repository\AlbumRepository;
 use App\Repository\IntentionRepository;
 use App\Repository\InventoryRepository;
+use App\Service\CoordinateApi;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
