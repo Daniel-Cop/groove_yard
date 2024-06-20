@@ -12,6 +12,7 @@ class CoordinateApi
     ) {
     }
     // Generate latitude and longitude from a specific address via the Nominatim API
+
     public function getCoordinate(Address $address): array
     {
         $street = $address->getNumber() . '+' . $address->getStreet();

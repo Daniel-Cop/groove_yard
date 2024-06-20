@@ -2,15 +2,20 @@
 - pagina modifica profilo
 - uno user può avere in inventario due volte lo stesso album, lasciare?
 - modifica profilo
-- eventlistener per automatizzare lat e long
 
-!!! form in form (esempio in silver spoon) !!!
-
-Chiedere se è possibile in un event subscriber segnalare un istanza di evento da non seguire
 
 ** FRONT **
     - carta album
     - pagina profilo
     - pagina collezione
-    - pagina singolo album
+    - pagina singolo albuca
 
+    Card ex.
+    https://tailwindcomponents.com/component/blog-card-3
+    https://tailwindflex.com/@noob_dev/products-card-grid
+
+    Button card
+    https://tailwindflex.com/@prashant/resonsive-card-grid-with-hover-animation
+
+    Searchbar
+    https://tailwindflex.com/@prajwal/responsive-search-bar

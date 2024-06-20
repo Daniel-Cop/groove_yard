@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Event\AddressRegisteredEvent;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -33,18 +35,30 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
-        
+
     }
 
     #[Route(path: '/register', name: 'app_register')]
-    public function register(Request $request, EntityManagerInterface $em, Security $security)
-    {
+    public function register(
+        Request $request,
+        EntityManagerInterface $em,
+        Security $security,
+        EventDispatcherInterface $dispatcher
+    ) {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $address = $user->getAddress();
+            $address->addUser($user);
+            $event = new AddressRegisteredEvent($address);
+            $dispatcher->dispatch($event, AddressRegisteredEvent::NAME);
+
+
+            $em->persist($address);
             $em->persist($user);
             $em->flush();
 
