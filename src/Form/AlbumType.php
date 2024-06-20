@@ -23,16 +23,10 @@ class AlbumType extends AbstractType
             ->add('image', FileType::class, [
                 'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new Image()
-                ]
+                'constraints' => [new Image()]
             ])
             ->add('year')
             ->add('description')
-            ->add('state', EntityType::class, [
-                'class' => Condition::class,
-                'choice_label' => 'name',
-            ])
             ->add('Create', SubmitType::class)
         ;
     }

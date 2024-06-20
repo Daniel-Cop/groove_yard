@@ -124,7 +124,6 @@ class AppFixtures extends Fixture
                 ->setUsername($faker->userName())
                 ->setRoles(['ROLE_USER'])
                 ->setPassword('test')
-                ->setImage('profile-'.$faker->randomElement(['1', '2', '3', '4']).'png')
                 ->setAddress($addressList[$i]);
 
             $userList[] = $user;
@@ -137,7 +136,6 @@ class AppFixtures extends Fixture
             ->setUsername('Admin')
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword('admin')
-            ->setImage('profile-'.$faker->randomElement(['1', '2', '3', '4']).'png')
             ->setAddress($addressList[20]);
 
         $manager->persist($admin);

@@ -3,15 +3,47 @@
 {% block title %}Groove Yard{% endblock %}
 
 {% block body %}
-    <div class='flex'>
-        <img class="size-[128px]" src="{{ asset('images/' ~ album.image) }}" alt="Record picture">
-        <div>
-        <h2>{{ album.title }}</h2>
-        <h3> {{ album.artist }}</h3>
-        <p>{{ album.year }}</p>
-        </div>
-    </div>
 
     <a href="{{ path('user_collection_add', {id: album.id}) }}">Add to my collection</a>
+    <div class="bg-[#292a2d] p-3 m-3 mt-3 rounded-lg">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row -mx-4">
+            <div class="md:flex-1 px-4">
+                <div class="h-[460px] rounded-lg bg-gray-300 mb-4">
+                    <img class="w-full h-full object-cover" src="{{ asset('images/' ~ album.image) }}" alt="{{ album.title }}">
+                </div>
+                <div class="flex -mx-2 mb-4">
+                    <div class="w-1/2 px-2">
+                        <button class="w-full bg-[#c24238] text-white py-2 px-4 rounded-xl font-bold hover:bg-[#882e28]">Add to collection</button>
+                    </div>
+                    <div class="w-1/2 px-2">
+                        <button class="w-full bg-[#c24238]  text-gray-800 dark:text-white py-2 px-4 rounded-xl font-bold hover:bg-[#882e28] ">Search for seller</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-1 px-4 justify-evenly">
+                <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-2">{{ album.title }}</h2>
+                <h3 class="text-xl text-gray-800 dark:text-white mb-2">By <span class="font-bold text-2xl">{{ album.artist }}</span></h2>
+                <div class="flex mb-4">
+                    <div class="mr-4">
+                        <span class="font-bold text-gray-700 dark:text-gray-300">Year:</span>
+                        <span class="text-gray-600 dark:text-gray-300">{{ album.year }}</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-bold text-gray-700 dark:text-gray-300">Description:</span>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                        sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut
+                        lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque
+                        ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non
+                        sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

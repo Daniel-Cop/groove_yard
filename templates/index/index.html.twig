@@ -9,6 +9,9 @@
     {# <img class="w-full md:w-1/2" src="{{ asset('images/home_splash.svg') }}" alt="Groove Yard" /> #}
   </section>
 
-  <section>
-  </section>
+   {% if app.user == null %}
+    <section class="my-5">
+      <p class="text-center text-xl">First time here? <span class="font-bold text-[#c24238]"><a href="{{ path('app_register')}}">Sign up</a></span> so you can start build your collection!</p>
+    </section>
+   {% endif %}
 {% endblock %}

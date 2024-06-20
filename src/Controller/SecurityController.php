@@ -9,10 +9,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class SecurityController extends AbstractController
 {
@@ -43,7 +47,8 @@ class SecurityController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         Security $security,
-        EventDispatcherInterface $dispatcher
+        EventDispatcherInterface $dispatcher,
+        SluggerInterface $slugger
     ) {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -51,6 +56,28 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+             /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $img */
+            $img = $form->get('image')->getData();
+            dd($img);
+            if ($img) {
+
+                $ogFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($ogFilename);
+                $filename = $safeFilename.'-'.uniqid().'.'. $img->guessExtension();
+
+                try {
+                    $img->move('uploads/albums/', $filename);
+                    
+                    if ($user->getImage() !== null) {
+                        unlink(__DIR__ . "/../../public/uploads/user/" . $user->getImage());
+                    }
+
+                    $user->setImage($filename);
+                } catch (FileException $e) {
+                    $form->addError(new FormError('Error during the upload'));
+                }
+            }
 
             $address = $user->getAddress();
             $address->addUser($user);
@@ -68,7 +95,8 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/register.html.twig', [
-            'form' => $form
+            'form' => $form,
+            'user' => $user
         ]);
     }
 

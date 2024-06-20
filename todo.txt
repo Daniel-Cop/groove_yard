@@ -2,7 +2,9 @@
 - pagina modifica profilo
 - uno user può avere in inventario due volte lo stesso album, lasciare?
 - modifica profilo
-
+- assert e limitazioni
+- upload file non funziona, ritorna sempre image: null
+- aggiungere descrizione disco
 
 ** FRONT **
     - carta album
@@ -10,7 +12,7 @@
     - pagina collezione
     - pagina singolo albuca
 
-    Card ex.
+    Card 
     https://tailwindcomponents.com/component/blog-card-3
     https://tailwindflex.com/@noob_dev/products-card-grid
 
@@ -19,3 +21,10 @@
 
     Searchbar
     https://tailwindflex.com/@prajwal/responsive-search-bar
+
+    Profile page 
+    https://tailwindflex.com/@lucas-m/show-user-details
+    https://tailwindflex.com/@prem/info-card
+
+    Product page 
+    https://tailwindflex.com/@jaxstone/product-page-2
