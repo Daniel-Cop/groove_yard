@@ -6,6 +6,7 @@
 - assert e limitazioni
 - upload file non funziona, ritorna sempre image: null
 - aggiungere descrizione disco
+- market dovrebbe essere limitato a chi é loggato
 
 ** FRONT **
     - carta album
@@ -17,6 +18,7 @@
     Card 
     https://tailwindcomponents.com/component/blog-card-3
     https://tailwindflex.com/@noob_dev/products-card-grid
+    https://tailwindflex.com/@amit/horizontal-post-card-with-image
 
     Button card
     https://tailwindflex.com/@prashant/resonsive-card-grid-with-hover-animation
