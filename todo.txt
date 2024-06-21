@@ -1,4 +1,5 @@
 - pagina lista album: impaginare 10 alla volta e campo ricerca
+    https://github.com/KnpLabs/KnpPaginatorBundle?tab=readme-ov-file#configuration-example
 - pagina modifica profilo
 - uno user può avere in inventario due volte lo stesso album, lasciare?
 - modifica profilo
@@ -11,6 +12,7 @@
     - pagina profilo
     - pagina collezione
     - pagina singolo albuca
+
 
     Card 
     https://tailwindcomponents.com/component/blog-card-3

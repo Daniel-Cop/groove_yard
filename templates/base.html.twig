@@ -10,6 +10,8 @@
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+        {% block paginator %}
+        {% endblock %}
     </head>
 
     {% set currentPath = path(app.request.attributes.get('_route'),

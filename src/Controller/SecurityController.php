@@ -57,18 +57,17 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-             /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $img */
+            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $img */
             $img = $form->get('image')->getData();
-            dd($img);
             if ($img) {
 
                 $ogFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($ogFilename);
-                $filename = $safeFilename.'-'.uniqid().'.'. $img->guessExtension();
+                $filename = $safeFilename . '-' . uniqid() . '.' . $img->guessExtension();
 
                 try {
-                    $img->move('uploads/albums/', $filename);
-                    
+                    $img->move('uploads/user/', $filename);
+
                     if ($user->getImage() !== null) {
                         unlink(__DIR__ . "/../../public/uploads/user/" . $user->getImage());
                     }
