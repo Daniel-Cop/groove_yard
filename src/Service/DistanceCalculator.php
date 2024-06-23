@@ -10,7 +10,7 @@ class DistanceCalculator {
             // coordinates in France as examples, but technically more correct)
             // It take an address and a range and it calculate a range of minimun and maximum latitude and
             // longitude which represent the given distance from the original coordinates 
-            // 45.756399, 4.851763 - 45°45'23.5"N 4°52'05.6"E
+
 
         private const EARTH_RADIUS = 6371; // in Kilometers (f*** you americans)
             

@@ -4,7 +4,7 @@ namespace App\Mail;
 
 use App\Entity\User;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class ItemToSellNotification {
 
@@ -14,7 +14,7 @@ class ItemToSellNotification {
     ) {}
 
     public function sendItemNotification(User $user){
-        $email = (new Email())
+        $email = (new TemplatedEmail())
             ->from($this->adminEmail)
             ->to($user->getEmail())
             ->subject("We found one!")

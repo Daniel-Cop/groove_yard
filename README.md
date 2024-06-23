@@ -22,10 +22,10 @@ Edit profile form does not ask for security check.
 
 ## Info
 
-EasyAdmin access: /admin
-MAILER_DSN need to be setted in .env.local
-Admin email / password: grooveyard@email.com / admin
-Password base per tutti gli utenti: test
+- EasyAdmin access: /admin
+- MAILER_DSN need to be setted in .env.local
+- Admin email / password: grooveyard@email.com / admin
+- Password base per tutti gli utenti: test
 
 The Inventory entity represents the collections of individual users, it is a user-album link table that adds extra information like conditions and intention. A user can have the same album as different inventory entry (as he can own multiple copies) with different conditions and intentions.
 
@@ -39,6 +39,11 @@ The Inventory entity represents the collections of individual users, it is a use
 - GetCoordinateSubscriber: Listen to the AddressRegistrationEvent to get the user address, find his coordinates and pass them into the user info.
 - HashUSerPasswordSubscriber: Listen to the prePersist event to hash the user's password when they register.
 - UserNotifierSubscriber: Listen to the ItemToSellEvent in order to send a notification email to users who have the same album in their wish list within 50 km of the seller.
+
+### Services
+
+- CoordinateApi: The getCoordinate method takes an instance of the Address entity and returns, by help of the API 'Nominatim', an array with latitude and longitude.
+- DistanceCalculator: Contains the getBoundingBox method which takes an instance of the Address entity and a radius in kilometers to returns a bounding box, i.e. a maximum and a minimum in longitude and latitude around the given address of the requested range.
 
 ## Known issiue
 

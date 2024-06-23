@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Event\AddressRegisteredEvent;
 use App\Form\RegisterType;
 use App\Mail\UserRegisteredConfirmation;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +49,8 @@ class SecurityController extends AbstractController
         EntityManagerInterface $em,
         Security $security,
         UserRegisteredConfirmation $mailer,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+        EventDispatcherInterface $dispatcher
     ) {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -80,6 +83,8 @@ class SecurityController extends AbstractController
             $address = $user->getAddress();
             $address->addUser($user);
 
+            $event = new AddressRegisteredEvent($address);
+            $dispatcher->dispatch($event, AddressRegisteredEvent::NAME);
             
             $em->persist($address);
             $em->persist($user);
