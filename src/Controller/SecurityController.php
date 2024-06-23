@@ -12,7 +12,6 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -91,7 +90,7 @@ class SecurityController extends AbstractController
 
             $security->login($user);
 
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_thanks');
         }
 
         return $this->render('security/register.html.twig', [

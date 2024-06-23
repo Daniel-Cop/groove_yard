@@ -1,0 +1,11 @@
+{% for message in app.flashes('success') %}
+  <div class="bg-green-600 text-white px-4 py-2 mb-3">{{ message }}</div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+  <div class="bg-red-600 text-white px-4 py-2 mb-3">{{ message }}</div>
+{% endfor %}
+
+{% for message in app.flashes('info') %}
+  <div class="bg-blue-600 text-white px-4 py-2 mb-3">{{ message }}</div>
+{% endfor %}

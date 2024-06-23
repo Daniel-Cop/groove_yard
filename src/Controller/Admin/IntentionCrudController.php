@@ -2,18 +2,17 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Album;
+use App\Entity\Intention;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-
-class AlbumCrudController extends AbstractCrudController
+class IntentionCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Album::class;
+        return Intention::class;
     }
 
     
@@ -21,9 +20,7 @@ class AlbumCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('title'),
-            TextField::new('artist'),
-            TextEditorField::new('description'),
+            TextField::new('name')
         ];
     }
     

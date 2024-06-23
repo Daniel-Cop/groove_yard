@@ -3,7 +3,7 @@
 {% block title %}Groove Yard{% endblock %}
 
 {% block body %}
-<div class="flex justify-center items-center">
+<div class="flex justify-center items-center flex-col">
     <div class="bg-[#292a2d] overflow-hidden shadow rounded-lg mt-10 border text-white min-w-[450px]">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg leading-6 font-medium text-white">
@@ -43,5 +43,6 @@
             </dl>
         </div>
     </div>
+    <a href="{{ path('user_edit') }}" class="my-5 text-center w-64 bg-[#c24238] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#882e28]">Edit Profile</a>
 </div>
 {% endblock %}

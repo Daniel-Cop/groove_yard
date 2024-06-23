@@ -36,7 +36,11 @@ class UserNotifierSubscriber
         
         $sellerLat = $entity->getUser()->getAddress()->getLatitude();
         $sellerLon = $entity->getUser()->getAddress()->getLongitude();
-        $users = $this->repo->findByAlbumToSell('To Sell', $entity->getAlbum());
+        $items = $this->repo->findByAlbumToSell('Want', $entity->getAlbum());
+        $users = [];
+        foreach ($items as $item) {
+            $users[] = $item->getUser();
+        }
 
         foreach ($users as $user) {
             

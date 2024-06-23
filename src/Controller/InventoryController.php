@@ -6,7 +6,6 @@ use App\Entity\Album;
 use App\Entity\Inventory;
 use App\Form\InventoryType;
 use App\Form\SearchType;
-use App\Repository\IntentionRepository;
 use App\Repository\InventoryRepository;
 use App\Service\DistanceCalculator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -67,11 +66,11 @@ class InventoryController extends AbstractController
                     $event = new ItemToSellEvent($item);
                     $dispatcher->dispatch($event, ItemToSellEvent::NAME);
                 }
-
+            
             $em->persist($item);
             $em->flush();
 
-
+            $this->addFlash('success', 'Album added to your collection');
             return $this->redirectToRoute('user_collection');
         }
 
@@ -98,6 +97,7 @@ class InventoryController extends AbstractController
             
             $em->flush();
 
+            $this->addFlash('success', 'Item in collection successfully edited');
             return $this->redirectToRoute('user_collection', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -114,6 +114,7 @@ class InventoryController extends AbstractController
             $em->remove($item);
             $em->flush();
         }
+        $this->addFlash('success', 'Item deleted from collection');
         return $this->redirectToRoute('user_collection', [], Response::HTTP_SEE_OTHER);
     }
 

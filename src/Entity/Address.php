@@ -6,6 +6,7 @@ use App\Repository\AddressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
@@ -16,15 +17,30 @@ class Address
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Adress is mandatory")]
     private ?string $street = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\Type(
+        type: 'integer',
+        message: 'The address number is not a valid.',
+    )]
+    #[Assert\Positive]
     private ?string $number = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\NotBlank(message: "Postal Code is mandatory")]
+    #[Assert\Length(
+        min: 5,
+        max: 10,
+        minMessage: 'Postal code need to be 5 number',
+        maxMessage: 'Postal code too long',
+    )]
+    #[Assert\Positive]
     private ?string $postalCode = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "City is mandatory")]
     private ?string $city = null;
 
     /**

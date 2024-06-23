@@ -18,9 +18,27 @@ The search can also be done personally via the Market page, where you can see th
 
 At the moment there are no real methods of contact between users, apart from giving access to other users' emails, solution that could cause problems given the disclosure of personal data. A chat system could be a solution.
 
+Edit profile form does not ask for security check.
+
 ## Info
 
+EasyAdmin access: /admin
+MAILER_DSN need to be setted in .env.local
 Admin email / password: grooveyard@email.com / admin
+Password base per tutti gli utenti: test
+
+The Inventory entity represents the collections of individual users, it is a user-album link table that adds extra information like conditions and intention. A user can have the same album as different inventory entry (as he can own multiple copies) with different conditions and intentions.
+
+### Custom events
+
+- AddressRegistrationEvent: This event is dispatched when a new address is registered.
+- ItemToSellEvent: This event is dispatched when an item (inventory entity) is registrated or edited with intention "to sell".
+
+### Event Subscribers
+
+- GetCoordinateSubscriber: Listen to the AddressRegistrationEvent to get the user address, find his coordinates and pass them into the user info.
+- HashUSerPasswordSubscriber: Listen to the prePersist event to hash the user's password when they register.
+- UserNotifierSubscriber: Listen to the ItemToSellEvent in order to send a notification email to users who have the same album in their wish list within 50 km of the seller.
 
 ## Known issiue
 

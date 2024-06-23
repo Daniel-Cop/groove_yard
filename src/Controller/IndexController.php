@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Address;
 use App\Repository\ConditionRepository;
-use App\Service\CoordinateApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -35,5 +33,11 @@ class IndexController extends AbstractController
         return $this->render('index/conditions.html.twig', [
             'conditions' => $conditions
         ]);
+    }
+
+    #[Route('/thanks', name: 'app_thanks')]
+    public function thanks(): Response
+    {
+        return $this->render('index/thanks.html.twig');
     }
 }

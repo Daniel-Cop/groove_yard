@@ -147,7 +147,8 @@ class AppFixtures extends Fixture
             $record->setTitle($d['title'])
             ->setArtist($d['artist'])
             ->setYear($d['year'])
-            ->setImage('vinyl-'.$faker->randomElement(['1', '2', '3', '4', '5']).'.png');
+            ->setImage('vinyl-'.$faker->randomElement(['1', '2', '3', '4', '5']).'.png')
+            ->setDescription($faker->paragraph(4));
 
             $albumList[] = $record;
             $manager->persist($record);
