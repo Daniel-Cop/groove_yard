@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Repository\ConditionRepository;
 use App\Service\CoordinateApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,20 +27,13 @@ class IndexController extends AbstractController
     }
 
 
-    #[Route('/coordinate', name: 'user_coordinate')]
-    public function coordinate(CoordinateApi $coordinateGetter): Response
+    #[Route('/conditions', name: 'app_conditions')]
+    public function conditions(ConditionRepository $repo): Response
     {
-        $address = new Address();
-        $address->setNumber('256')
-            ->setStreet('Paul Bert')
-            ->setCity('Lyon')
-            ->setPostalCode('69003');
-
-        $coordinate = $coordinateGetter->getCoordinate($address);
-
-        return $this->render('index/about.html.twig', [
-            'lat' => $coordinate['lat'],
-            'lon' => $coordinate['lon']
+        $conditions = $repo->findAll();
+        
+        return $this->render('index/conditions.html.twig', [
+            'conditions' => $conditions
         ]);
     }
 }

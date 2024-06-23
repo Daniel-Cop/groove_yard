@@ -8,28 +8,44 @@ class DistanceCalculator {
             // I use this service for business logic. It uses radians instead of flat distances to account for 
             // the curvature of the Earth's surface. (Perhaps overkill given that the prototype takes 
             // coordinates in France as examples, but technically more correct)
+            // It take an address and a range and it calculate a range of minimun and maximum latitude and
+            // longitude which represent the given distance from the original coordinates 
+            // 45.756399, 4.851763 - 45°45'23.5"N 4°52'05.6"E
 
         private const EARTH_RADIUS = 6371; // in Kilometers (f*** you americans)
             
         public function getBoundingBox(Address $address, int $radius) // radius to be given in kilometers
-        {
+        {   
+            // approximate method: treat Earth as a perfect sphere assume that one degree of latitude is 111.11 km
+            $deltaDeg = $radius / 111.11; // convert range to degrees
+
+            $minLat = $address->getLatitude() - $deltaDeg;
+            $maxLat = $address->getLatitude() + $deltaDeg;
+            $minLon = $address->getLongitude() - abs($radius / (2*111.11 * cos($address->getLatitude()))/2);
+            $maxLon = $address->getLongitude() + abs($radius / (2*111.11 * cos($address->getLatitude()))/2);
+
+
+            // this should be a more precise method, but it gives me unprecise results
             // Convert distance to radians
-            $radRadius = $radius / self::EARTH_RADIUS;
+            // $radRadius = $radius / self::EARTH_RADIUS;
+
+
     
-            // Calculate offsets for latitude and longitude based on radius
-            $radLatOffset = asin(sin($radRadius / 2));
-            $radLonOffset = rad2deg(asin(sin($radRadius / 2) / cos($address->getLatitude())));
+            // // Calculate offsets for latitude and longitude based on radius
+            // $radLatOffset = asin(sin($radRadius / 2));
+            // $radLonOffset = rad2deg(asin(sin($radRadius / 2) / cos($address->getLatitude())));
     
-            $minLat = $address->getLatitude() - rad2deg($radLatOffset);
-            $maxLat = $address->getLatitude() + rad2deg($radLatOffset);
-            $minLon = $address->getLongitude() - $radLonOffset;
-            $maxLon = $address->getLongitude() + $radLonOffset;
+            // $minLat = $address->getLatitude() - abs(rad2deg($radLatOffset))*2;
+            // $maxLat = $address->getLatitude() + abs(rad2deg($radLatOffset))*2;
+            // $minLon = $address->getLongitude() - abs($radLonOffset);
+            // $maxLon = $address->getLongitude() + abs($radLonOffset);
     
+
             return [
                 'minLat' => $minLat,
                 'maxLat' => $maxLat,
                 'minLon' => $minLon,
-                'maxLon' => $maxLon,
+                'maxLon' => $maxLon
             ];
         }
     

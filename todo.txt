@@ -1,19 +1,7 @@
-- pagina lista album: impaginare 10 alla volta e campo ricerca
-    https://github.com/KnpLabs/KnpPaginatorBundle?tab=readme-ov-file#configuration-example
-- pagina modifica profilo
-- uno user può avere in inventario due volte lo stesso album, lasciare?
 - modifica profilo
+ -flash messages (new item, edit item)
 - assert e limitazioni
-- upload file non funziona, ritorna sempre image: null
 - aggiungere descrizione disco
-- market dovrebbe essere limitato a chi é loggato
-
-** FRONT **
-    - carta album
-    - pagina profilo
-    - pagina collezione
-    - pagina singolo albuca
-
 
     Card 
     https://tailwindcomponents.com/component/blog-card-3
@@ -32,3 +20,37 @@
 
     Product page 
     https://tailwindflex.com/@jaxstone/product-page-2
+
+
+
+RegistrationConfirmationSubscriber
+    <?php
+
+namespace App\EventSubscriber;
+
+use App\Entity\User;
+use App\Mail\UserRegisteredConfirmation;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+use Doctrine\ORM\Event\PrePersistEventArgs;
+use Doctrine\ORM\Events;
+
+// At user registration send a confirmation email
+#[AsDoctrineListener(Events::prePersist)]
+class RegistrationConfirmationSubscriber
+{
+    public function __construct(
+        private UserRegisteredConfirmation $mailer
+    ) {
+    }
+
+    public function prePersist(PrePersistEventArgs $event): void
+    {
+        $entity = $event->getObject();
+
+        if (!$entity instanceof User) {
+            return;
+        }
+
+        $this->mailer->sendRegistrationConfirmation($entity);
+    }
+}

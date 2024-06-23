@@ -101,8 +101,8 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 21; $i++) {
             $address = new Address();
             $address
-            ->setLatitude($faker->latitude($min = 43, $max = 49))
-            ->setLongitude($faker->longitude($min = 0.5, $max = 5.8))
+            ->setLatitude($faker->latitude($min = 45.5, $max = 46))
+            ->setLongitude($faker->longitude($min = 4.5, $max = 5.2))
             ->setStreet($faker->streetName())
             ->setNumber($faker->numerify('##'))
             ->setPostalCode($faker->postcode())
@@ -110,7 +110,7 @@ class AppFixtures extends Fixture
             // I tried to create more real fixture by creating a random latitude and longitude (but always situated in France)
             // and then to use the reverse api to find the address from the coordinates. Unluckly the research was not always 
             // precise enough to find an address 100% of the times, so i went via faker to create a fake address attached to real
-            // french coordinates (what the app really need is coordinate anyway)
+            // french coordinates, they will be all around Lyon so i will be able to better test the functionality over shorter distances
 
             $addressList[] = $address;
 
@@ -132,7 +132,7 @@ class AppFixtures extends Fixture
         }
 
         $admin = new User();
-        $admin->setEmail('admin@groove.com')
+        $admin->setEmail('grooveyard@email.com')
             ->setUsername('Admin')
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword('admin')

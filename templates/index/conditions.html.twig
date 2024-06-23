@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Groove Yard{% endblock %}
+
+{% block body %}
+<div class="m-5">
+    <h2 class="text-center text-3xl">Conditions</h2>
+    {% for condition in conditions %}
+    <div class="my-3">
+        <h3 class="text-xl font-bold">{{ condition.name}}</h3>
+        <p>
+            {{ condition.description }}
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -21,19 +21,22 @@ class InventoryType extends AbstractType
             ->add('status', EntityType::class, [
                 'class' => Condition::class,
                 'choice_label' => 'name',
+                'multiple' => false,
             ])
             ->add('intention', EntityType::class, [
                 'class' => Intention::class,
                 'choice_label' => 'name',
-            ])
-            ->add('Add', SubmitType::class)
-        ;
+                'expanded' => true,
+                'multiple' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Inventory::class,
+            'method' => 'POST',
+            'csrf_protection' => false,
         ]);
     }
 }

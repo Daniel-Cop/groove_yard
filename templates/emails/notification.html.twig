@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block navbar %} {% endblock %}
+{% block body %}
+<h1 class="text-3xl text-center m-2">Welcome found one!</h1>
+
+<p class="text-xl text-center m-2">
+   Hey {{ user.username }}, another user put the album you are looking for in his sell list!</span>
+</p>
+
+<p class="text-xl text-center m-2">
+    Go find him at the <a href="{{ url('album_market') }}" class="text-[#c24238] font-bold">market</a>!
+</p>
+
+{% endblock %}

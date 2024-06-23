@@ -3,44 +3,73 @@
 {% block title %}Groove Yard{% endblock %}
 
 {% block body %}
-  <h2 class="font-bold text-3xl">My collection</h2>
-
+{% if  owned|length != 0 %}
+<h2 class="font-bold text-3xl bg-[#c24238] inline-block p-3 px-5 mt-4 mx-4 rounded-lg text-white">Collection</h2>
+{% endif %}
+<div class='grid grid-cols-4 gap-2 m-4'>
   {% for item in owned %}
-    <p>
-        <span class="hover:underline" href="">{{ item.getAlbum().title }}</span> - {{ item.getAlbum().artist }} -
-        <span>{{ item.status }}</span> - 
-        <span>{{ item.intention }}</span>
-        <a href="{{ path('user_collection_edit', {id: item.getId()}) }}" class="font-bold">Edit</a>
-        <form method="post" action="{{ path('user_collection_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete {{ item.getAlbum().getTitle() }} from your collection?');">
-          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
-          <button class="btn">Delete</button>
-        </form>
-    </p>
-  
-      {# <img src="{{ asset('albums/' ~ album.image ) }}" alt=""> #}
+
+      <div class="max-w-sm overflow-hidden shadow-lg bg-[#292a2d] rounded-lg text-white">
+          <img class="w-full" src="{{ asset('images/' ~ item.album.image)}}" alt="Sunset in the mountains">
+          <div class="px-6 py-4">
+              <div class="text-xl mb-2 text-center"><span class="font-bold">{{ item.album.title }}</span> - {{ item.album.artist }}</div>
+              <p class="text-white text-base text-center">{{ item.status }}</p>
+          </div>
+          <div class="px-6 py-4 w-full grid grid-cols-2 gap-4">
+              <a href="{{ path('user_collection_edit', {'id': item.id}) }}" class="text-center w-full bg-[#c24238] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#882e28]">Edit</a>
+            <form method="post" action="{{ path('user_collection_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete {{ item.getAlbum().getTitle() }} from your collection?');">
+              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+              <button class="text-center w-full bg-[#c24238] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#882e28]">Delete</button>
+            </form>
+          </div>
+      </div>
 
   {% endfor %}
-  <h2 class="font-bold text-3xl">I'm looking for</h2>
-  {% for item in want %}
-    <p>
-        <span class="hover:underline" href="">{{ item.getAlbum().title }}</span> - {{ item.getAlbum().artist }} -
-        <span>{{ item.status }}</span> - 
-        <span>{{ item.intention }}</span>
-        <a href="{{ path('user_collection_edit', {id: item.getId()}) }}" class="font-bold">Edit</a>
-    </p>
-  
-      {# <img src="{{ asset('albums/' ~ album.image ) }}" alt=""> #}
-
-  {% endfor %}
-  <h2 class="font-bold text-3xl">I'm selling</h2>
+</div>
+{% if  to_sell|length != 0 %}
+<h2 class="font-bold text-3xl bg-[#c24238] inline-block p-3 px-5 mt-4 mx-4 rounded-lg text-white">Sell list</h2>
+<div class='grid grid-cols-4 gap-2 m-4'>
+{% endif %}
   {% for item in to_sell %}
-    <p>
-        <span class="hover:underline" href="">{{ item.getAlbum().title }}</span> - {{ item.getAlbum().artist }} -
-        <span>{{ item.status }}</span> - 
-        <span>{{ item.intention }}</span>
-        <a href="{{ path('user_collection_edit', {id: item.getId()}) }}" class="font-bold">Edit</a>
-    </p>
-  
-      {# <img src="{{ asset('albums/' ~ album.image ) }}" alt=""> #}
+
+      <div class="max-w-sm overflow-hidden shadow-lg bg-[#292a2d] rounded-lg text-white">
+          <img class="w-full" src="{{ asset('images/' ~ item.album.image)}}" alt="Sunset in the mountains">
+          <div class="px-6 py-4">
+              <div class="text-xl mb-2 text-center"><span class="font-bold">{{ item.album.title }}</span> - {{ item.album.artist }}</div>
+              <p class="text-white text-base text-center">{{ item.status }}</p>
+          </div>
+          <div class="px-6 py-4 w-full grid grid-cols-2 gap-4">
+              <a href="{{ path('user_collection_edit', {'id': item.id}) }}" class="text-center w-full bg-[#c24238] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#882e28]">Edit</a>
+            <form method="post" action="{{ path('user_collection_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete {{ item.getAlbum().getTitle() }} from your collection?');">
+              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+              <button class="text-center w-full bg-[#c24238] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#882e28]">Delete</button>
+            </form>
+          </div>
+      </div>
+
   {% endfor %}
+</div>
+{% if  want|length != 0 %}
+  <h2 class="font-bold text-3xl bg-[#c24238] inline-block p-3 px-5 mt-4 mx-4 rounded-lg text-white">Wish list</h2>
+{% endif %}
+<div class='grid grid-cols-4 gap-2 m-4'>
+  {% for item in want %}
+
+      <div class="max-w-sm overflow-hidden shadow-lg bg-[#292a2d] rounded-lg text-white">
+          <img class="w-full" src="{{ asset('images/' ~ item.album.image)}}" alt="Sunset in the mountains">
+          <div class="px-6 py-4">
+              <div class="text-xl mb-2 text-center"><span class="font-bold">{{ item.album.title }}</span> - {{ item.album.artist }}</div>
+              <p class="text-white text-base text-center">{{ item.status }}</p>
+          </div>
+          <div class="px-6 py-4 w-full grid grid-cols-2 gap-4">
+              <a href="{{ path('user_collection_edit', {'id': item.id}) }}" class="text-center w-full bg-[#c24238] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#882e28]">Edit</a>
+            <form method="post" action="{{ path('user_collection_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete {{ item.getAlbum().getTitle() }} from your collection?');">
+              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+              <button class="text-center w-full bg-[#c24238] text-white py-2 px-4 rounded-lg font-bold hover:bg-[#882e28]">Delete</button>
+            </form>
+          </div>
+      </div>
+
+  {% endfor %}
+
 {% endblock %}
